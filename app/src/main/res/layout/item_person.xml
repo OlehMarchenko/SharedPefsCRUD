@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:gravity="end"
         android:hint="@string/edit_text_person_number">
     </TextView>
 
@@ -39,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/text_view_number"
+        android:gravity="end"
         android:hint="@string/edit_text_person_mail">
     </TextView>
 
@@ -48,15 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/text_view_mail"
+        android:gravity="end"
         android:hint="@string/edit_text_person_skype">
     </TextView>
-
-    <ImageButton
-        android:id="@+id/image_button_item_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_launcher"
-        android:layout_below="@id/text_view_surname">
-    </ImageButton>
 
 </RelativeLayout>

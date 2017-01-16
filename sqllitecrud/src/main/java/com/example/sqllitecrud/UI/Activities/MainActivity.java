@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         etMail.getText().toString(),
                         etSkype.getText().toString()
                 );
-                crudsqLite.addPersons(person);
+                crudsqLite.addPerson(person);
                 //crudSharedPreferences.addPerson(this, person);
                 clearText();
                 break;

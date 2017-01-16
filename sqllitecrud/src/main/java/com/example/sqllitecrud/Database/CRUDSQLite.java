@@ -44,7 +44,7 @@ public class CRUDSQLite {
         return persons;
     }
 
-    public void addPersons(Person person){
+    public void addPerson(Person person){
         SQLiteDatabase sqLiteDatabase = sqLiteDBHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Config.KEY_ID, person.getId());
@@ -54,6 +54,59 @@ public class CRUDSQLite {
         values.put(Config.KEY_MAIL, person.getMail());
         values.put(Config.KEY_SKYPE, person.getSkype());
         sqLiteDatabase.insert(Config.TABLE_PERSON, null, values);
+    }
+
+    public void deleteAllPersons(){
+        SQLiteDatabase db = sqLiteDBHelper.getWritableDatabase();
+        db.delete(Config.TABLE_PERSON, null, null);
+        db.close();
+    }
+
+    public void deletePerson(int id){
+        SQLiteDatabase db = sqLiteDBHelper.getWritableDatabase();
+        db.delete(Config.TABLE_PERSON, Config.KEY_ID + " = " + id, null);
+        db.close();
+    }
+
+    public void updatePerson(int id, String name, String surname, String number, String mail, String skype){
+        SQLiteDatabase db = sqLiteDBHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Name", name);
+        values.put("Surname", surname);
+        values.put("Phone", number);
+        values.put("Mail", mail);
+        values.put("Skype", skype);
+        db.update(Config.TABLE_PERSON, values, Config.KEY_ID + " = " + id, null);
+        db.close();
+    }
+
+    public ArrayList<Person> getPerson(int id){
+        ArrayList<Person> persons = new ArrayList<Person>();
+        SQLiteDatabase db = sqLiteDBHelper.getReadableDatabase();
+        Cursor cursor = db.query(Config.TABLE_PERSON,
+                null,
+                Config.KEY_ID + " = " + id,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+
+        Person person = new Person();
+        person.setId(Integer.parseInt(cursor.getString(0)));
+        person.setName(cursor.getString(1));
+        person.setSurname(cursor.getString(2));
+        person.setNumber(cursor.getString(3));
+        person.setMail(cursor.getString(4));
+        person.setSkype(cursor.getString(5));
+        persons.add(person);
+        db.close();
+
+        return persons;
     }
 
 }

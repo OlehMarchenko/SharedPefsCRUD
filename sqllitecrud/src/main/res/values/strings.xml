@@ -8,4 +8,5 @@
     <string name="edit_text_person_mail">mail</string>
     <string name="edit_text_person_skype">skype</string>
     <string name="list_person">List person</string>
+    <string name="edit_text_search">search by name</string>
 </resources>

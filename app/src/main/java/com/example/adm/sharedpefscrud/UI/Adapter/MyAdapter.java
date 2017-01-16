@@ -1,9 +1,13 @@
 package com.example.adm.sharedpefscrud.UI.Adapter;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -15,7 +19,9 @@ import android.widget.TextView;
 
 import com.example.adm.sharedpefscrud.Model.Person;
 import com.example.adm.sharedpefscrud.R;
+import com.example.adm.sharedpefscrud.UI.Activities.MainActivity;
 
+import java.sql.SQLData;
 import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
@@ -44,7 +50,6 @@ public class MyAdapter extends BaseAdapter {
         TextView tvNumberPerson = (TextView) view.findViewById(R.id.text_view_number);
         TextView tvMailPerson = (TextView) view.findViewById(R.id.text_view_mail);
         TextView tvSkypePerson = (TextView) view.findViewById(R.id.text_view_skype);
-        ImageButton ibDelete = (ImageButton) view.findViewById(R.id.image_button_item_delete);
 
         tvNamePerson.setText(person.getName());
         tvSurnamePerson.setText(person.getSurname());
@@ -66,12 +71,6 @@ public class MyAdapter extends BaseAdapter {
             }
         });
         tvSkypePerson.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        ibDelete.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
