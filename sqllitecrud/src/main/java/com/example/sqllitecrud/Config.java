@@ -20,17 +20,16 @@ public class Config {
     public static final String[] COLUMNS = { KEY_ID, KEY_NAME, KEY_SURNAME, KEY_PHONE, KEY_MAIL, KEY_SKYPE };
 
     public static final String COMMAND_CREATE = "create table "
-                                                + TABLE_PERSON + " ("
-                                                + KEY_ID + " INTEGER PRIMARY KEY, "
-                                                + KEY_NAME + " TEXT, "
-                                                + KEY_SURNAME + " TEXT, "
-                                                + KEY_PHONE + " TEXT, "
-                                                + KEY_MAIL + " TEXT, "
-                                                + KEY_SKYPE + " TEXT"
-                                                + ");";
+            + TABLE_PERSON + " ("
+            + KEY_ID + " INTEGER PRIMARY KEY, "
+            + KEY_NAME + " TEXT, "
+            + KEY_SURNAME + " TEXT, "
+            + KEY_PHONE + " TEXT, "
+            + KEY_MAIL + " TEXT, "
+            + KEY_SKYPE + " TEXT"
+            + ");";
 
     public static final String COMMAND_DELETE = "DROP TABLE IF EXISTS " + TABLE_PERSON;
-    public static final String COMMAND_SELECT = "SELECT * FROM " + TABLE_PERSON;
-    public static final int DB_VERSION = 06012017;
-
+    public static final String COMMAND_SELECT = "SELECT * FROM " + TABLE_PERSON ;
+    public static final int DB_VERSION = 5012017;
 }

@@ -12,13 +12,15 @@ import com.example.sqllitecrud.Config;
 
 public class SQLiteDBHelper extends SQLiteOpenHelper {
 
-    public SQLiteDBHelper(Context context) {
+    public SQLiteDBHelper(Context context){
         super(context, Config.DB_NAME, null, Config.DB_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(Config.COMMAND_CREATE);
+
     }
 
     @Override

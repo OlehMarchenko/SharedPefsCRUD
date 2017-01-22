@@ -1,1 +1,1 @@
-include ':app', ':sqllitecrud'
+include ':sharedprefs', ':sqllitecrud'

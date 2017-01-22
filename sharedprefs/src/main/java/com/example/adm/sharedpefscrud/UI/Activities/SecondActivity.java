@@ -1,4 +1,4 @@
-package com.example.sqllitecrud.UI.Activities;
+package com.example.adm.sharedpefscrud.UI.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,23 +13,19 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.sqllitecrud.R;
-import com.example.sqllitecrud.UI.Adapter.FilterAdapter;
-import com.example.sqllitecrud.Database.CRUDSQLite;
-import com.example.sqllitecrud.Model.Person;
+import com.example.adm.sharedpefscrud.Database.CRUDSharedPreferences;
+import com.example.adm.sharedpefscrud.Model.Person;
+import com.example.adm.sharedpefscrud.R;
+import com.example.adm.sharedpefscrud.UI.Adapter.FilterAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by adm on 06.01.2017.
- */
-
 public class SecondActivity extends AppCompatActivity {
-    private ListView lvPersons;
-    private ArrayList<Person> personList;
-    private FilterAdapter adapter;
-    private CRUDSQLite crudsqLite;
 
+    private ArrayList<Person> personList;
+    private ListView lvPersons;
+    private FilterAdapter adapter;
+    private CRUDSharedPreferences crudSharedPreferences;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,8 +63,8 @@ public class SecondActivity extends AppCompatActivity {
                 int id = Integer.parseInt(etPersonId.getText().toString());
 
                 personList = new ArrayList<Person>();
-                crudsqLite = new CRUDSQLite(SecondActivity.this);
-                personList = crudsqLite.getPerson(id);
+                crudSharedPreferences = new CRUDSharedPreferences();
+                personList.add(crudSharedPreferences.getPerson(SecondActivity.this, id));
 
                 adapter = new FilterAdapter(SecondActivity.this, personList);
                 lvPersons.setAdapter(adapter);
@@ -93,8 +89,8 @@ public class SecondActivity extends AppCompatActivity {
         EditText etSearch = (EditText) findViewById(R.id.et_second_search);
 
         personList = new ArrayList<Person>();
-        crudsqLite = new CRUDSQLite(this);
-        personList = crudsqLite.getAllPersons();
+        crudSharedPreferences = new CRUDSharedPreferences();
+        personList = crudSharedPreferences.getPersons(this);
 
         adapter = new FilterAdapter(this, personList);
         lvPersons.setAdapter(adapter);

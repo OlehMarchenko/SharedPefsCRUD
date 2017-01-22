@@ -1,39 +1,57 @@
 package com.example.sqllitecrud.UI.Activities;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.sqllitecrud.R;
 import com.example.sqllitecrud.Database.CRUDSQLite;
 import com.example.sqllitecrud.Model.Person;
-import com.example.sqllitecrud.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText etId;
-    private EditText etName;
-    private EditText etSurname;
-    private EditText etNumber;
-    private EditText etMail;
-    private EditText etSkype;
+    private EditText editnName;
+    private EditText editsName;
+    private EditText editTelephone;
+    private EditText editMail;
+    private EditText editSkype;
+    private Button buttonAddPerson;
     private CRUDSQLite crudsqLite;
-    //private CRUDSharedPreferences crudSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etId = (EditText)findViewById(R.id.person_id);
-        etName = (EditText)findViewById(R.id.person_name);
-        etSurname = (EditText)findViewById(R.id.person_surname);
-        etNumber = (EditText)findViewById(R.id.person_number);
-        etMail = (EditText)findViewById(R.id.person_mail);
-        etSkype = (EditText)findViewById(R.id.person_skype);
+        editnName = (EditText) findViewById(R.id.edit_text_nName);
+        editsName = (EditText) findViewById(R.id.edit_text_sName);
+        editTelephone = (EditText) findViewById(R.id.edit_text_Telephone);
+        editMail = (EditText) findViewById(R.id.edit_text_Mail);
+        editSkype = (EditText) findViewById(R.id.edit_text_Skype);
+        buttonAddPerson = (Button)findViewById(R.id.button_add_person);
+
+        buttonAddPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crudsqLite = new CRUDSQLite(v.getContext());
+                switch (v.getId()) {
+
+                    case R.id.button_add_person: {
+                        Person person = getPerson();
+                        crudsqLite.addPerson(person);
+                        clearText();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -46,50 +64,27 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_list_person){
+        if (id == R.id.list_main_person){
             followToListActivity();
         }
-
         return true;
     }
 
-    public void onClickAddPerson(View view){
-        crudsqLite = new CRUDSQLite(view.getContext());
-        //crudSharedPreferences = new CRUDSharedPreferences();
-        switch (view.getId()){
-            case R.id.button_add_person:
-                Person person = new Person(
-                        Integer.valueOf(etId.getText().toString()),
-                        etName.getText().toString(),
-                        etSurname.getText().toString(),
-                        etNumber.getText().toString(),
-                        etMail.getText().toString(),
-                        etSkype.getText().toString()
-                );
-                crudsqLite.addPerson(person);
-                //crudSharedPreferences.addPerson(this, person);
-                clearText();
-                break;
-            default:
-                break;
-        }
+    private Person getPerson() {
+        return new Person(editnName.getText().toString(), editsName.getText().toString(),
+                editMail.getText().toString(), editTelephone.getText().toString(), editSkype.getText().toString());
     }
 
     private void followToListActivity(){
-        //Intent callIntent = new Intent(Intent.ACTION_CALL.person.getPhoneNumber().toString());
-        //startActivity(callIntent);
         Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-        //intent.putExtra("text", String text);
         startActivity(intent);
     }
 
     private void clearText(){
-        etId.setText("");
-        etName.setText("");
-        etSurname.setText("");
-        etNumber.setText("");
-        etMail.setText("");
-        etSkype.setText("");
+        editnName.setText("");
+        editsName.setText("");
+        editTelephone.setText("");
+        editMail.setText("");
+        editSkype.setText("");
     }
-
 }
